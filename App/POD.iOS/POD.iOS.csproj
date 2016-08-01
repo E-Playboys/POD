@@ -92,6 +92,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Providers\HudProvider.cs" />
     <Compile Include="Providers\ToastProvider.cs" />
+    <Compile Include="Providers\SqlLiteProvider.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,6 +133,18 @@
     </Reference>
     <Reference Include="Plugin.Connectivity.Abstractions, Version=2.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\sqlite-net-pcl.1.1.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCL.batteries, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLitePCL.bundle_green.0.9.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCL.batteries.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCL.raw, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLitePCL.raw.0.9.2\lib\Xamarin.iOS10\SQLitePCL.raw.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -187,6 +200,10 @@
     <ProjectReference Include="..\..\POD.Common\POD.Common.csproj">
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>POD.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\POD.Repository\POD.Repository.csproj">
+      <Project>{7bdfc150-646d-4ad8-8d76-7fa8c1f50b72}</Project>
+      <Name>POD.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\POD.Service\POD.Service.csproj">
       <Project>{ffe17a92-b272-42d2-a9c0-7b8117df9f49}</Project>
