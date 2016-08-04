@@ -4,34 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
 using Xamarin.Forms;
 
 namespace POD.Forms.ViewModels
 {
     public class DebtListViewModel : BaseNavigationViewModel
     {
-        private IEnumerable<DebtItemModel> _debts;
-        public IEnumerable<DebtItemModel> Debts
+        private ObservableRangeCollection<DebtItemModel> _debts;
+        public ObservableRangeCollection<DebtItemModel> Debts
         {
             get { return _debts; }
             set { SetProperty(ref _debts, value); }
         }
 
-        public ICommand LoadDebtsCommand;
-
-        public DebtListViewModel()
-        {
-            Title = "Debts";
-
-            LoadDebtsCommand = new Command(async () => await ExecuteLoadDebtsCommand());
-        }
-
-        private async Task ExecuteLoadDebtsCommand()
-        {
-            if (IsBusy)
-                return;
-
-            Debts = new List<DebtItemModel>
+        private ObservableRangeCollection<DebtItemModel> DummyData = new ObservableRangeCollection<DebtItemModel>
             {
                 new DebtItemModel
                 {
@@ -71,12 +58,52 @@ namespace POD.Forms.ViewModels
                     PlannedMonthlyPayment = 1000,
                     EstimatedTimeLeft = "20 years",
                     LastPaymentDate = DateTime.Now
+                },
+                new DebtItemModel
+                {
+                    Icon = "icon_wife.png",
+                    Color = Color.Navy,
+                    Name = "Buy Wife",
+                    PaidPercent = 80,
+                    PaidAmount = 7500,
+                    CurrentBalance = 7000,
+                    StartingDebtAmount = 10000,
+                    PlannedMonthlyPayment = 900,
+                    EstimatedTimeLeft = "10 years",
+                    LastPaymentDate = DateTime.Now
                 }
             };
+
+        public ICommand LoadDebtsCommand { get; set; }
+
+        public DebtListViewModel()
+        {
+            Title = "Debts";
+
+            LoadDebtsCommand = new Command(async () => await ExecuteLoadDebtsCommand());
+        }
+
+        private async Task ExecuteLoadDebtsCommand()
+        {
+            if (IsBusy)
+                return;
+
+            LoadDebts();
+        }
+
+        public void LoadDebts()
+        {
+            if (Debts == null)
+            {
+                Debts = new ObservableRangeCollection<DebtItemModel>();
+            }
+            Debts.AddRange(DummyData);
+            Title = "Debts (" + Debts.Count + ")";
         }
 
         public class DebtItemModel
         {
+            public int Id { get; set; }
             public string Icon { get; set; }
             public Color Color { get; set; }
             public string Name { get; set; }

@@ -7,7 +7,10 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="POD.Forms.Pages.DebtListPage"
              Title="{Binding Title}">
-  <views:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray">
+  <views:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray" LoadMoreCommand="{Binding LoadDebtsCommand}">
+    <x:Arguments>
+      <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+    </x:Arguments>
     <views:ExtendedListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
