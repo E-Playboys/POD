@@ -8,14 +8,5 @@ using Xamarin.Forms;
 
 namespace POD.Forms.Utilities
 {
-    public static class StringExtensions
-    {
-        public static void ToToast(this string message, bool centered = false)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                App.Current.ToastProvider.Notify(message, centered);
-            });
-        }
-    }
+
 }

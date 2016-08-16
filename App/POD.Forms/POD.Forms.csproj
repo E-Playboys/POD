@@ -38,6 +38,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\ObservableRangeCollection.cs" />
+    <Compile Include="Utilities\AppService.cs" />
     <Compile Include="Views\BaseContentPage.cs" />
     <Compile Include="Views\DebtListPage.xaml.cs">
       <DependentUpon>DebtListPage.xaml</DependentUpon>
@@ -51,7 +53,6 @@
     <Compile Include="Providers\IToastProvider.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\Converters.cs" />
-    <Compile Include="Utilities\Hud.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="ViewModels\DebtListPageViewModel.cs" />
     <Compile Include="Controls\ExtendedListView.cs" />

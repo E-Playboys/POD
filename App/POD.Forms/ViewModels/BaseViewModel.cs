@@ -20,8 +20,7 @@ namespace POD.Forms.ViewModels
     /// </summary>
     public abstract class BaseViewModel : BindableBase, INavigationAware
     {
-        protected readonly INavigationService NavigationService;
-        protected readonly IPageDialogService DialogService;
+        protected readonly IAppService AppService;
 
         private string _title;
         public string Title
@@ -37,10 +36,9 @@ namespace POD.Forms.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
-        protected BaseViewModel(INavigationService navigationService, IPageDialogService dialogService)
+        protected BaseViewModel(IAppService appService)
         {
-            NavigationService = navigationService;
-            DialogService = dialogService;
+            AppService = appService;
         }
 
         public virtual void OnNavigatedFrom(NavigationParameters parameters)

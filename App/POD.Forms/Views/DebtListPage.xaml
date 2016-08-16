@@ -9,7 +9,10 @@
              xmlns:views="clr-namespace:POD.Forms.Views;assembly=POD.Forms"
              x:Class="POD.Forms.Views.DebtListPage"
              Title="{Binding Title}">
-  <controls:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray">
+  <controls:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray"  LoadMoreCommand="{Binding LoadDebtsCommand}">
+    <x:Arguments>
+      <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+    </x:Arguments>
     <controls:ExtendedListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>

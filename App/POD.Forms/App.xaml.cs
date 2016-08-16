@@ -9,18 +9,13 @@ using POD.Forms.ViewModels;
 using POD.Forms.Views;
 using Prism.Unity;
 using Xamarin.Forms;
+using Microsoft.Practices.Unity;
 
 namespace POD.Forms
 {
     public partial class App : PrismApplication
     {
         public new static App Current => (App)Application.Current;
-
-        private IHudProvider _hudProvider;
-        public IHudProvider HudProvider => _hudProvider ?? (_hudProvider = DependencyService.Get<IHudProvider>());
-
-        private IToastProvider _toastProvider;
-        public IToastProvider ToastProvider => _toastProvider ?? (_toastProvider = DependencyService.Get<IToastProvider>());
 
         public static bool IsNetworkReachable { get; set; }
 
@@ -45,6 +40,8 @@ namespace POD.Forms
         {
             Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<DebtListPage>();
+
+            Container.RegisterType<IAppService, AppService>();
         }
 
         protected override void OnStart()
@@ -68,13 +65,15 @@ namespace POD.Forms
             {
                 try
                 {
-                    _hudProvider?.Dismiss();
+                    var appService = Container.Resolve<IAppService>();
+
+                    appService.Hud.Dismiss();
 
                     var msg = exception.Message;
                     if (msg.Length > 300)
                         msg = msg.Substring(0, 300);
 
-                    msg.ToToast(true);
+                    appService.Toast.Notify(msg, true);
                 }
                 catch (Exception e)
                 {
