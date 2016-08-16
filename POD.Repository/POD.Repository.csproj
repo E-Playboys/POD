@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Repository.cs" />
-    <Compile Include="ISqlLiteProvider.cs" />
+    <Compile Include="ISQLiteProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

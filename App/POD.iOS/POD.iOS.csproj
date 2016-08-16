@@ -92,7 +92,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Providers\HudProvider.cs" />
     <Compile Include="Providers\ToastProvider.cs" />
-    <Compile Include="Providers\SqlLiteProvider.cs" />
+    <Compile Include="Providers\SQLiteProvider.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />

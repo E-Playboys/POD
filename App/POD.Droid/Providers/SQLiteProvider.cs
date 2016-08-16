@@ -4,10 +4,10 @@ using POD.Repository;
 using SQLite;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(SqlLiteProvider))]
+[assembly: Dependency(typeof(SQLiteProvider))]
 namespace POD.Droid.Providers
 {
-    public class SqlLiteProvider : ISqlLiteProvider
+    public class SQLiteProvider : ISQLiteProvider
     {
         public SQLiteConnection GetConnection(string databaseName)
         {

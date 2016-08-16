@@ -17,7 +17,7 @@ namespace POD.Repository
 
         public Repository()
         {
-            _database = DependencyService.Get<ISqlLiteProvider>().GetConnection("ApplicationDatabase.db3");
+            _database = DependencyService.Get<ISQLiteProvider>().GetConnection("ApplicationDatabase.db3");
             // create the tables
             //_database.CreateTable<T>();
         }

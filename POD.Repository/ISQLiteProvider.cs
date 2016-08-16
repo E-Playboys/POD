@@ -7,7 +7,7 @@ using SQLite;
 
 namespace POD.Repository
 {
-    public interface ISqlLiteProvider
+    public interface ISQLiteProvider
     {
         SQLiteConnection GetConnection(string databaseName);
     }
