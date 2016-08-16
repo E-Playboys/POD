@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace POD.Forms.Pages
+namespace POD.Forms.Views
 {
     public partial class MainPage : ContentPage
     {

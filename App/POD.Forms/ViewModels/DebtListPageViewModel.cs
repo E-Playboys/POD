@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace POD.Forms.ViewModels
 {
-    public class DebtListViewModel : BaseNavigationViewModel
+    public class DebtListPageViewModel : BaseViewModel
     {
         private IEnumerable<DebtItemModel> _debts;
         public IEnumerable<DebtItemModel> Debts
@@ -19,17 +20,26 @@ namespace POD.Forms.ViewModels
 
         public ICommand LoadDebtsCommand;
 
-        public DebtListViewModel()
+        public DebtListPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Debts";
 
             LoadDebtsCommand = new Command(async () => await ExecuteLoadDebtsCommand());
         }
 
+        public override void OnNavigatedTo(NavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            LoadDebtsCommand.Execute(null);
+        }
+
         private async Task ExecuteLoadDebtsCommand()
         {
             if (IsBusy)
                 return;
+
+            IsBusy = true;
 
             Debts = new List<DebtItemModel>
             {
@@ -73,6 +83,8 @@ namespace POD.Forms.ViewModels
                     LastPaymentDate = DateTime.Now
                 }
             };
+
+            IsBusy = false;
         }
 
         public class DebtItemModel

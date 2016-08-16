@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:DebtListPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:POD.Forms.Views;assembly=POD.Forms"
-             xmlns:pages="clr-namespace:POD.Forms.Pages;assembly=POD.Forms"
              xmlns:converters="clr-namespace:POD.Forms.Utilities;assembly=POD.Forms"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             x:Class="POD.Forms.Pages.DebtListPage"
+             xmlns:xlab="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:controls="clr-namespace:POD.Forms.Controls;assembly=POD.Forms"
+             xmlns:views="clr-namespace:POD.Forms.Views;assembly=POD.Forms"
+             x:Class="POD.Forms.Views.DebtListPage"
              Title="{Binding Title}">
-  <views:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray">
-    <views:ExtendedListView.ItemTemplate>
+  <controls:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray">
+    <controls:ExtendedListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
           <Frame HasShadow="True" Padding="5">
@@ -75,9 +77,9 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="End">
-                  <controls:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_add.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
-                  <controls:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_custom.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
-                  <controls:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_history.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
+                  <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_add.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
+                  <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_custom.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
+                  <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_history.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
                 </StackLayout>
               </Grid>
 
@@ -87,6 +89,6 @@
           </Frame>
         </ViewCell>
       </DataTemplate>
-    </views:ExtendedListView.ItemTemplate>
-  </views:ExtendedListView>
-</pages:DebtListPageXaml>
+    </controls:ExtendedListView.ItemTemplate>
+  </controls:ExtendedListView>
+</views:BaseContentPage>

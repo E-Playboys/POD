@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmHelpers;
 using POD.Forms.Utilities;
+using Prism.Mvvm;
+using Prism.Navigation;
+using Prism.Services;
 using Xamarin.Forms;
 
 namespace POD.Forms.ViewModels
@@ -16,93 +18,39 @@ namespace POD.Forms.ViewModels
     /// - Run task safely with all exceptions be reported to Hockey App and notified to users
     /// - Cancel running tasks when a user navigates away from a page
     /// </summary>
-    public abstract class BaseNavigationViewModel : BaseViewModel, INavigation
+    public abstract class BaseViewModel : BindableBase, INavigationAware
     {
-        #region Navigation
+        protected readonly INavigationService NavigationService;
+        protected readonly IPageDialogService DialogService;
 
-        private INavigation _navigation => Application.Current?.MainPage?.Navigation;
-
-        public void RemovePage(Page page)
+        private string _title;
+        public string Title
         {
-            _navigation?.RemovePage(page);
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
-        public void InsertPageBefore(Page page, Page before)
+        private bool _isBusy;
+        public bool IsBusy
         {
-            _navigation?.InsertPageBefore(page, before);
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
         }
 
-        public async Task PushAsync(Page page)
+        protected BaseViewModel(INavigationService navigationService, IPageDialogService dialogService)
         {
-            var task = _navigation?.PushAsync(page);
-            if (task != null)
-                await task;
+            NavigationService = navigationService;
+            DialogService = dialogService;
         }
 
-        public async Task<Page> PopAsync()
+        public virtual void OnNavigatedFrom(NavigationParameters parameters)
         {
-            var task = _navigation?.PopAsync();
-            return task != null ? await task : await Task.FromResult(null as Page);
+            CancelTasks();
         }
 
-        public async Task PopToRootAsync()
+        public virtual void OnNavigatedTo(NavigationParameters parameters)
         {
-            var task = _navigation?.PopToRootAsync();
-            if (task != null)
-                await task;
         }
-
-        public async Task PushModalAsync(Page page)
-        {
-            var task = _navigation?.PushModalAsync(page);
-            if (task != null)
-                await task;
-        }
-
-        public async Task<Page> PopModalAsync()
-        {
-            var task = _navigation?.PopModalAsync();
-            return task != null ? await task : await Task.FromResult(null as Page);
-        }
-
-        public async Task PushAsync(Page page, bool animated)
-        {
-            var task = _navigation?.PushAsync(page, animated);
-            if (task != null)
-                await task;
-        }
-
-        public async Task<Page> PopAsync(bool animated)
-        {
-            var task = _navigation?.PopAsync(animated);
-            return task != null ? await task : await Task.FromResult(null as Page);
-        }
-
-        public async Task PopToRootAsync(bool animated)
-        {
-            var task = _navigation?.PopToRootAsync(animated);
-            if (task != null)
-                await task;
-        }
-
-        public async Task PushModalAsync(Page page, bool animated)
-        {
-            var task = _navigation?.PushModalAsync(page, animated);
-            if (task != null)
-                await task;
-        }
-
-        public async Task<Page> PopModalAsync(bool animated)
-        {
-            var task = _navigation?.PopModalAsync(animated);
-            return task != null ? await task : await Task.FromResult(null as Page);
-        }
-
-        public IReadOnlyList<Page> NavigationStack => _navigation?.NavigationStack;
-
-        public IReadOnlyList<Page> ModalStack => _navigation?.ModalStack;
-
-        #endregion
 
         #region Task Safe
 
@@ -169,7 +117,7 @@ namespace POD.Forms.ViewModels
             MessagingCenter.Send<BaseViewModel, Exception>(this, Messages.ExceptionOccurred, exception);
         }
 
-        public virtual void CancelTasks()
+        public void CancelTasks()
         {
             if (!_cancellationTokenSource.IsCancellationRequested && _cancellationTokenSource.Token.CanBeCanceled)
             {

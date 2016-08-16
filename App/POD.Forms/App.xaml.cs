@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using MvvmHelpers;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
-using POD.Forms.Pages;
 using POD.Forms.Providers;
 using POD.Forms.Utilities;
 using POD.Forms.ViewModels;
-using Prism.Autofac;
-using Prism.Autofac.Forms;
+using POD.Forms.Views;
+using Prism.Unity;
 using Xamarin.Forms;
 
 namespace POD.Forms
@@ -31,7 +29,7 @@ namespace POD.Forms
             InitializeComponent();
 
             // Global exception handler for view models
-            MessagingCenter.Subscribe<BaseNavigationViewModel, Exception>(this, Messages.ExceptionOccurred, OnAppExceptionOccurred);
+            MessagingCenter.Subscribe<BaseViewModel, Exception>(this, Messages.ExceptionOccurred, OnAppExceptionOccurred);
 
             // Network status
             IsNetworkReachable = CrossConnectivity.Current.IsConnected;
@@ -40,7 +38,7 @@ namespace POD.Forms
                 IsNetworkReachable = args.IsConnected;
             };
 
-            MainPage = new NavigationPage(new DebtListPage());
+            NavigationService.NavigateAsync("DebtListPage");
         }
 
         protected override void RegisterTypes()

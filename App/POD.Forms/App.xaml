@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<autofac:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+<unity:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:autofac="clr-namespace:Prism.Autofac;assembly=Prism.Autofac.Forms"
+             xmlns:unity="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              x:Class="POD.Forms.App">
   <Application.Resources>
 
     <!-- Application resource dictionary -->
 
   </Application.Resources>
-</autofac:PrismApplication>
+</unity:PrismApplication>

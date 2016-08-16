@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace POD.Forms.Views
+namespace POD.Forms.Controls
 {
     class ExtendedListView : ListView
     {
