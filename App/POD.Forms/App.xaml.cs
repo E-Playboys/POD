@@ -8,24 +8,29 @@ using POD.Forms.Pages;
 using POD.Forms.Providers;
 using POD.Forms.Utilities;
 using POD.Forms.ViewModels;
+using Prism.Autofac;
+using Prism.Autofac.Forms;
 using Xamarin.Forms;
 
 namespace POD.Forms
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
         public new static App Current => (App)Application.Current;
 
         private IHudProvider _hudProvider;
         public IHudProvider HudProvider => _hudProvider ?? (_hudProvider = DependencyService.Get<IHudProvider>());
 
+        private IToastProvider _toastProvider;
+        public IToastProvider ToastProvider => _toastProvider ?? (_toastProvider = DependencyService.Get<IToastProvider>());
+
         public static bool IsNetworkReachable { get; set; }
 
-        public App()
+        protected override void OnInitialized()
         {
             InitializeComponent();
-            
-            // Global exception handler for view model
+
+            // Global exception handler for view models
             MessagingCenter.Subscribe<BaseNavigationViewModel, Exception>(this, Messages.ExceptionOccurred, OnAppExceptionOccurred);
 
             // Network status
@@ -36,6 +41,12 @@ namespace POD.Forms
             };
 
             MainPage = new NavigationPage(new DebtListPage());
+        }
+
+        protected override void RegisterTypes()
+        {
+            Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<DebtListPage>();
         }
 
         protected override void OnStart()
@@ -53,7 +64,7 @@ namespace POD.Forms
             // Handle when your app resumes
         }
 
-		void OnAppExceptionOccurred(BaseViewModel viewModel, Exception exception)
+		private void OnAppExceptionOccurred(BaseViewModel viewModel, Exception exception)
         {
             Device.BeginInvokeOnMainThread(() =>
             {

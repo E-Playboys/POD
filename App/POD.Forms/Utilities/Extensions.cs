@@ -14,8 +14,7 @@ namespace POD.Forms.Utilities
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                var toastProvider = DependencyService.Get<IToastProvider>();
-                toastProvider.Notify(message, centered);
+                App.Current.ToastProvider.Notify(message, centered);
             });
         }
     }
