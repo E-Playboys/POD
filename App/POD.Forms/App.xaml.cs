@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using HockeyApp;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using POD.Forms.Providers;
@@ -23,8 +24,12 @@ namespace POD.Forms
         {
             InitializeComponent();
 
+            // TODO: HockeyApp to report caught exceptions
+            // HockeyApp team is working on their way to bring in reporting caught exceptions ability 
+            // so just let the crash happens for now and the CrashManager will report it
+            //
             // Global exception handler for view models
-            MessagingCenter.Subscribe<BaseViewModel, Exception>(this, Messages.ExceptionOccurred, OnAppExceptionOccurred);
+            //MessagingCenter.Subscribe<BaseViewModel, Exception>(this, Messages.ExceptionOccurred, OnAppExceptionOccurred);
 
             // Network status
             IsNetworkReachable = CrossConnectivity.Current.IsConnected;

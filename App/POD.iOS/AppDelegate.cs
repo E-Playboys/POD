@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using HockeyApp.iOS;
 using POD.Forms;
 using UIKit;
 
@@ -23,10 +24,20 @@ namespace POD.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            RegisterHockeyAppServices();
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        private void RegisterHockeyAppServices()
+        {
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure("3e4d33e4d76c4c7f8ce537bdec2c5070");
+            manager.StartManager();
+            manager.Authenticator.AuthenticateInstallation();
         }
     }
 }

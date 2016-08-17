@@ -32,3 +32,4 @@ using Android.App;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
+[assembly: MetaData("net.hockeyapp.android.appIdentifier", Value = "c856a0583bd84935bc9ece5ab233396d")]
