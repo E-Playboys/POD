@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FloatingButton.cs" />
     <Compile Include="Utilities\ObservableRangeCollection.cs" />
     <Compile Include="Utilities\AppService.cs" />
     <Compile Include="Views\BaseContentPage.cs" />

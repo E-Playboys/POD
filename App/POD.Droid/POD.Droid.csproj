@@ -200,6 +200,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Providers\HudProvider.cs" />
     <Compile Include="Providers\ToastProvider.cs" />
+    <Compile Include="Renderers\FloatingButtonRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashActivity.cs" />

@@ -9,89 +9,95 @@
              xmlns:views="clr-namespace:POD.Forms.Views;assembly=POD.Forms"
              x:Class="POD.Forms.Views.DebtListPage"
              Title="{Binding Title}">
-  <controls:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray"  LoadMoreCommand="{Binding LoadDebtsCommand}">
-    <x:Arguments>
-      <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-    </x:Arguments>
-    <controls:ExtendedListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <Frame HasShadow="True" Padding="5">
-            <Grid>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition/>
-                <RowDefinition Height="20"/>
-              </Grid.RowDefinitions>
+  <OnPlatform x:TypeArguments="View">
+    <OnPlatform.Android>
+      <AbsoluteLayout>
+        <controls:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Debts}" RowHeight="270" SeparatorVisibility="Default" SeparatorColor="Gray"  LoadMoreCommand="{Binding LoadDebtsCommand}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+          <x:Arguments>
+            <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+          </x:Arguments>
+          <controls:ExtendedListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <Frame HasShadow="True" Padding="5">
+                  <Grid>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="30"/>
+                      <RowDefinition Height="100"/>
+                      <RowDefinition/>
+                      <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
 
-              <!-- Header -->
-              <StackLayout Grid.Row="0" Orientation="Horizontal">
-                <!--<StackLayout BackgroundColor="{Binding Color}" WidthRequest="50"/>-->
-                <Image Source="{Binding Icon}"/>
-                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
-              </StackLayout>
+                    <!-- Header -->
+                    <StackLayout Grid.Row="0" Orientation="Horizontal">
+                      <Image Source="{Binding Icon}"/>
+                      <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
+                    </StackLayout>
 
-              <!-- Progress -->
-              <StackLayout Grid.Row="1" Orientation="Vertical">
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                  </Grid.ColumnDefinitions>
+                    <!-- Progress -->
+                    <StackLayout Grid.Row="1" Orientation="Vertical">
+                      <Grid>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition/>
+                          <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                  <Label Grid.Column="0" Text="{Binding PaidPercent, StringFormat='{0}% Paid'}"/>
-                  <Label Grid.Column="1" Text="{Binding PaidAmount, StringFormat='{0:C}'}" HorizontalTextAlignment="End"/>
-                </Grid>
+                        <Label Grid.Column="0" Text="{Binding PaidPercent, StringFormat='{0}% Paid'}"/>
+                        <Label Grid.Column="1" Text="{Binding PaidAmount, StringFormat='{0:C}'}" HorizontalTextAlignment="End"/>
+                      </Grid>
 
-                <ProgressBar Progress="{Binding PaidPercent, Converter={x:Static converters:PercentToDecimalConverter.Instance}}"/>
+                      <ProgressBar Progress="{Binding PaidPercent, Converter={x:Static converters:PercentToDecimalConverter.Instance}}"/>
 
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                  </Grid.ColumnDefinitions>
+                      <Grid>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition/>
+                          <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                  <StackLayout Grid.Column="0" Orientation="Vertical">
-                    <Label Text="Current balance"/>
-                    <Label Text="{Binding CurrentBalance, StringFormat='{0:C}'}" FontAttributes="Bold"/>
-                  </StackLayout>
+                        <StackLayout Grid.Column="0" Orientation="Vertical">
+                          <Label Text="Current balance"/>
+                          <Label Text="{Binding CurrentBalance, StringFormat='{0:C}'}" FontAttributes="Bold"/>
+                        </StackLayout>
 
-                  <StackLayout Grid.Column="1">
-                    <Label Text="Estimated time left"  HorizontalTextAlignment="End"/>
-                    <Label Text="{Binding EstimatedTimeLeft}" FontAttributes="Bold" HorizontalTextAlignment="End"/>
-                  </StackLayout>
-                </Grid>
-              </StackLayout>
+                        <StackLayout Grid.Column="1">
+                          <Label Text="Estimated time left"  HorizontalTextAlignment="End"/>
+                          <Label Text="{Binding EstimatedTimeLeft}" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                        </StackLayout>
+                      </Grid>
+                    </StackLayout>
 
-              <!-- Additional info and actions-->
-              <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition/>
-                  <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                    <!-- Additional info and actions-->
+                    <Grid Grid.Row="2">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                      </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0" Orientation="Vertical">
-                  <Label Text="Starting debt"/>
-                  <Label Text="{Binding StartingDebtAmount, StringFormat='{0:C}'}"/>
+                      <StackLayout Grid.Column="0" Orientation="Vertical">
+                        <Label Text="Starting debt"/>
+                        <Label Text="{Binding StartingDebtAmount, StringFormat='{0:C}'}"/>
 
-                  <Label Text="Planned monthly payment"/>
-                  <Label Text="{Binding PlannedMonthlyPayment, StringFormat='{0:C}'}"/>
-                </StackLayout>
+                        <Label Text="Planned monthly payment"/>
+                        <Label Text="{Binding PlannedMonthlyPayment, StringFormat='{0:C}'}"/>
+                      </StackLayout>
 
-                <StackLayout Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="End">
-                  <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_add.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
-                  <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_custom.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
-                  <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_history.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
-                </StackLayout>
-              </Grid>
+                      <StackLayout Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="End">
+                        <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_add.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
+                        <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_custom.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
+                        <xlab:ImageButton Orientation="ImageOnTop" TextColor="White" Source="icon_history.png" HeightRequest="50" WidthRequest="50" ImageHeightRequest="32" ImageWidthRequest="32" BackgroundColor="#ffcc14"/>
+                      </StackLayout>
+                    </Grid>
 
-              <!-- Footer -->
-              <Label Grid.Row="3" Text="{Binding LastPaymentDate, StringFormat='Last payment recorded: {0:MMM d, yyyy}'}" FontAttributes="Italic" HorizontalTextAlignment="Center"/>
-            </Grid>
-          </Frame>
-        </ViewCell>
-      </DataTemplate>
-    </controls:ExtendedListView.ItemTemplate>
-  </controls:ExtendedListView>
+                    <!-- Footer -->
+                    <Label Grid.Row="3" Text="{Binding LastPaymentDate, StringFormat='Last payment recorded: {0:MMM d, yyyy}'}" FontAttributes="Italic" HorizontalTextAlignment="Center"/>
+                  </Grid>
+                </Frame>
+              </ViewCell>
+            </DataTemplate>
+          </controls:ExtendedListView.ItemTemplate>
+        </controls:ExtendedListView>
+        <controls:FloatingButton ImageName="icon_add" ColorNormal="Accent" AbsoluteLayout.LayoutBounds="1.0, 1.0, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
+      </AbsoluteLayout>
+    </OnPlatform.Android>
+  </OnPlatform>
 </views:BaseContentPage>
